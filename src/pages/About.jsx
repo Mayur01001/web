@@ -12,22 +12,18 @@ const AboutUs = () => {
     '/images/residential/saraswati_heights/Picture1.jpg',
     '/images/residential/orchid_aarambh/Picture2.jpg',
     '/images/residential/bay_view/Picture2.jpg',
-    '/images/villas/house_for_deepak_bhai/Picture1.jpg',
     '/images/villas/washivali/Picture2.jpg',
-    '/images/industrial/indamer/Picture1.jpg',
     '/images/commercial_residential/yog/Picture1.png',
+    '/images/residential/tripitak/Picture2.jpg',
     '/images/residential/firdous_apartment/Picture3.jpg',
     '/images/residential/ira_insignia/Picture1.jpg',
-    '/images/residential/minnat_group/Picture2.jpg',
     '/images/residential/monik/Picture1.jpg',
     '/images/residential/monik/Picture3.jpg',
-    '/images/residential/neelam_group/Picture1.jpg',
     '/images/residential/proposed_redevelopment_2/Picture1.png',
     '/images/residential/roohi_solitaire/Picture1.jpg',
-    '/images/residential/roohi_solitaire/Picture2.jpg',
     '/images/residential/satara_vatsala/Picture4.png',
     '/images/residential/satara_vatsala/Picture5.png',
-    '/images/residential/tripitak/Picture2.jpg',
+    
   ];
 
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -121,7 +117,7 @@ useEffect(() => {
           </div>
           <div>
             <h2 className="text-4xl md:text-5xl font-bold text-[#0c2d57]">10 MILLION+</h2>
-            <div className="w-20 border-t border-gray-300 my-3 mx-auto"></div>
+            <div className="w-60 border-t border-gray-300 my-3 mx-auto"></div>
             <p className="text-gray-700">SQFT. DESIGN STAGE+ APPROVALS</p>
           </div>
           <div>

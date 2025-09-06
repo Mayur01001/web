@@ -5,45 +5,30 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
   const timeoutRef = useRef(null);
   const location = useLocation();
 
   useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
+    const handleResize = () => setIsMobile(window.innerWidth < 1024);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
-  const isMobile = windowWidth < 1024;
 
   const Dropdown = ({ label, to, items }) => {
     const isOpen = openDropdown === label;
     const isActive = location.pathname.startsWith(to);
 
-    const clearCloseTimeout = () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-        timeoutRef.current = null;
-      }
-    };
-
-    const handleMouseEnter = () => {
-      clearCloseTimeout();
-      setOpenDropdown(label);
-    };
-
-    const handleMouseLeave = () => {
-      timeoutRef.current = setTimeout(() => {
-        setOpenDropdown(null);
-      }, 150);
-    };
-
     return (
       <div
         className="relative"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        onMouseEnter={() => {
+          if (timeoutRef.current) clearTimeout(timeoutRef.current);
+          setOpenDropdown(label);
+        }}
+        onMouseLeave={() => {
+          timeoutRef.current = setTimeout(() => setOpenDropdown(null), 150);
+        }}
       >
         <Link
           to={to}
@@ -89,13 +74,14 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-200">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 flex justify-between items-center py-4">
-        {/* Company Name */}
+      <div className="w-full flex justify-between items-center py-4 px-4 lg:px-12">
+        {/* Company Name aligned to left corner */}
         <Link
           to="/"
-          className="text-xl lg:text-2xl font-bold tracking-wide text-gray-900 uppercase"
+          className="font-bold text-lg font-sans leading-none text-left"
+          style={{ marginLeft: 0 }}
         >
-          ARCHITECT ABUZAR PLASTERWALA
+          ARCHITECT<br />ABUZAR<br />PLASTERWALA
         </Link>
 
         {/* Mobile Button */}
@@ -171,45 +157,21 @@ const Navbar = () => {
       {isMobile && isMobileMenuOpen && (
         <div className="lg:hidden bg-white shadow-md border-t border-gray-100">
           <div className="flex flex-col px-6 py-4 space-y-2">
-            <Link
-              to="/"
-              className="py-2 text-gray-700 hover:text-black"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Home
-            </Link>
-
-            <Link
-              to="/about"
-              className="py-2 text-gray-700 hover:text-black"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              About Us
-            </Link>
-
-            <Link
-              to="/projects"
-              className="py-2 text-gray-700 hover:text-black"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Projects
-            </Link>
-
-            <Link
-              to="/services"
-              className="py-2 text-gray-700 hover:text-black"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Services
-            </Link>
-
-            <Link
-              to="/contact"
-              className="py-2 text-gray-700 hover:text-black"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Contact
-            </Link>
+            {["/", "/about", "/projects", "/services", "/contact"].map(
+              (path, i) => (
+                <Link
+                  key={i}
+                  to={path}
+                  className="py-2 text-gray-700 hover:text-black"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {path === "/"
+                    ? "Home"
+                    : path.replace("/", "").charAt(0).toUpperCase() +
+                      path.slice(2)}
+                </Link>
+              )
+            )}
           </div>
         </div>
       )}

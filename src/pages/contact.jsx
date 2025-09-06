@@ -12,8 +12,8 @@ export default function Contact() {
     careers: "careers@yourcompany.com" // replace
   };
   const ADDRESS = {
-    line1: "123, Sample Street, Andheri West",
-    line2: "Mumbai, Maharashtra 400053, India",
+    line1: "123, SV Road, Santacruz West",
+    line2: "Mumbai, Maharashtra 400055, India",
     mapLink: "https://www.google.com/maps/place/Navjeevan+Grab,+Swami+Vivekananda+Rd,+MSEB+Colony,+Santacruz+(West),+Mumbai,+Maharashtra+400054/@19.0889912,72.8384174,21z/data=!4m9!1m2!2m1!1sSantacruz+East+reliance+mall+navjeevan+grab!3m5!1s0x3be7c9a596c22257:0x143371b75599232!8m2!3d19.089007!4d72.838538!16s%2Fg%2F1ydpjffzf?hl=en-US&entry=ttu&g_ep=EgoyMDI1MDgzMC4wIKXMDSoASAFQAw%3D%3D", // replace with precise link
   };
   const HOURS = [
